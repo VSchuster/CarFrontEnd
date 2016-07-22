@@ -1,0 +1,135 @@
+﻿<Page
+    x:Class="CarApplication.Daily"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CarApplication"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="Left">
+            <RelativePanel VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Height="400"
+                           Width="300"
+                           Background="Red"
+                           Margin="60,0,40,0">
+                <TextBlock Name="WeatherIcon"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       RelativePanel.AlignTopWithPanel="True"
+                           FontSize="30">
+                Weather
+                </TextBlock>
+                <RelativePanel Name="WeatherDisplay"
+                               RelativePanel.Below="WeatherIcon"
+                               RelativePanel.AlignHorizontalCenterWithPanel="True"
+                               Width="260"
+                               Height="200"
+                               Background="DarkGreen">
+                    <RelativePanel Name="Upper"
+                                   Width="260"
+                                   Height="80">
+                        <TextBlock Name="Temperature" 
+                                   FontSize="46"
+                                   Text="70"
+                                   Margin="80,0,0,0"
+                                   />
+                        <TextBlock Name="Units"
+                                   FontSize="46"
+                                   Text="*F"
+                                   RelativePanel.RightOf="Temperature"/>
+
+
+                    </RelativePanel>
+                    <Grid Name="Lower"
+                                   RelativePanel.Below="Upper"
+                                   Height="120"
+                                   Width="260">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <RelativePanel Name="Low"
+                                       HorizontalAlignment="Center">
+                            <TextBlock Name="Lo"
+                                       Text="Low"
+                                       RelativePanel.Above="LoData">
+                               
+                            </TextBlock>
+                            <RelativePanel Name="LoData"
+                                           RelativePanel.AlignBottomWithPanel="True">
+                                <TextBlock Name="LoTemperature"
+                                           Text="60"/>
+                                <TextBlock Name="LoUnits"
+                                           Text="*F"
+                                           RelativePanel.RightOf="LoTemperature"/>
+                            </RelativePanel>
+                        </RelativePanel>
+                        <RelativePanel Name="Image"
+                                       Grid.Column="1">
+
+                        </RelativePanel>
+                        <RelativePanel Name="High"
+                                       Grid.Column="2"
+                                       HorizontalAlignment="Center">
+                            <TextBlock Name="Hi"
+                                       Text="High"
+                                       RelativePanel.Above="HiData">
+
+                            </TextBlock>
+                            <RelativePanel Name="HiData"
+                                           RelativePanel.AlignBottomWithPanel="True">
+                                <TextBlock Name="HiTemperature"
+                                           Text="80"/>
+                                <TextBlock Name="HiUnits"
+                                           Text="*F"
+                                           RelativePanel.RightOf="HiTemperature"/>
+                            </RelativePanel>
+                        </RelativePanel>
+                    </Grid>
+                </RelativePanel>
+                <RelativePanel Name="WeatherLocation"
+                               RelativePanel.Below="WeatherDisplay"
+                               RelativePanel.AlignHorizontalCenterWithPanel="True">
+                    <TextBlock Name="City" 
+                               Text="City" 
+                               RelativePanel.LeftOf="Spacing"/>
+                    <TextBlock Name="Spacing"
+                               Text=","
+                               
+                               RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                    <TextBlock Name="State" 
+                               Text="State"
+                               RelativePanel.RightOf="Spacing"/>
+                </RelativePanel>
+                <RelativePanel Name="WeatherAlert"
+                               RelativePanel.Below="WeatherLocation">
+                    <TextBlock Name="Warning" 
+                               Text="Warning: "
+                               Margin="10"/>
+                    <TextBlock Name="WarningMessage"
+                               RelativePanel.RightOf="Warning"
+                               RelativePanel.Below="Warning"/>
+                </RelativePanel>
+            </RelativePanel>
+        </Grid>
+        <Grid Name="Right"
+              Grid.Column="1">
+            <RelativePanel VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Height="400"
+                           Width="300"
+                           Background="Beige"
+                           Margin="40,0,40,0">
+                        
+            </RelativePanel>
+        </Grid>
+        
+    </Grid>
+</Page>

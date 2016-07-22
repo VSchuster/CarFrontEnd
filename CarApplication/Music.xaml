@@ -1,0 +1,96 @@
+﻿<Page
+    x:Class="CarApplication.Music"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CarApplication"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid HorizontalAlignment="Center"
+          Width="800"
+          MaxHeight="500">
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/BrushedMetal.png"
+                        Stretch="UniformToFill">
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <RelativePanel Name="VolumeControl"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="100"
+                Height="Auto">
+            <Slider Name="VolumeSlider"
+                    Margin="20"
+                    Orientation="Vertical"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    FontSize="24"
+                    Height="250"/>
+            <TextBlock Text="Volume"
+                       RelativePanel.Below="VolumeSlider"
+                       RelativePanel.AlignHorizontalCenterWith="VolumeSlider"
+                       FontSize="22"
+                       Foreground="Cornsilk"
+                       Visibility="Visible"
+                       TextAlignment="Center"/>
+
+        </RelativePanel>
+        <RelativePanel Name="MediaDisplay"
+              Grid.Column="1"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center">
+            
+            <RelativePanel Name="UpperDisplay"
+                           RelativePanel.AlignVerticalCenterWithPanel="True">
+                <HyperlinkButton Name="AlbumArt"
+                                 Margin="10,0,30,0"
+                                 Width="150"
+                                 Height="150">
+                    <HyperlinkButton.Background>
+                        <ImageBrush ImageSource="Assets/Ford_Logo.png"
+                                Stretch="UniformToFill"/>
+                    </HyperlinkButton.Background>
+                </HyperlinkButton>
+                
+                <RelativePanel Name="TextDisplay"
+                               Height="150"
+                               Width="350"
+                               Margin="0,0,0,0"
+                               RelativePanel.RightOf="AlbumArt"
+                               RelativePanel.AlignVerticalCenterWith="AlbumArt"
+                               Background="Wheat">
+
+                    <TextBlock Name="Title"
+                               Text="Title"
+                               RelativePanel.AlignHorizontalCenterWithPanel="True"
+                               FontSize="40"/>
+                    <TextBlock Name="Album"
+                               RelativePanel.Below="Title"
+                               Text="Album"
+                               FontSize="26"
+                               RelativePanel.AlignHorizontalCenterWithPanel="True" VerticalAlignment="Top"/>
+                    <TextBlock Name="Artist"
+                               RelativePanel.Below="Album"
+                               Text="Artist"
+                               FontSize="26"
+                               RelativePanel.AlignHorizontalCenterWithPanel="True" Height="35" Margin="-0.2,0.4,0,-0.2" VerticalAlignment="Top"/>
+                </RelativePanel>
+            </RelativePanel>
+            
+            <Slider Name="SongSeek" 
+                    Orientation="Horizontal"
+                    RelativePanel.Below="UpperDisplay"
+                    Width="500"
+                    Margin="0,30,0,0"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+        </RelativePanel>
+    </Grid>
+</Page>
