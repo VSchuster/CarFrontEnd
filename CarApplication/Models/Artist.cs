@@ -7,10 +7,10 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace CarApplication.Models
 {
-    class Artist
+    public class Artist
     {
-        public int id { get; set; }
         public BitmapImage photo { get; set; }
         public string name { get; set; }
+        public Windows.Storage.StorageFolder folder { get; set; }
     }
 }

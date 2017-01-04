@@ -5,78 +5,231 @@
     xmlns:local="using:CarApplication"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:CarApplication.Models"
     mc:Ignorable="d">
     <Page.Resources>
-        <DataTemplate x:Key="FolderTemplate">
-            <StackPanel Orientation="Vertical">
-                <Image Width="150"
-                           Height="150"/>
-                <TextBlock Width="150"/>
-            </StackPanel>
-        </DataTemplate>
+        <Style x:Key="SongListing" TargetType="ListBoxItem">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="LightGray"/>
+                        <GradientStop Offset="1" Color="White"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Name="TypeSelection"
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Name="Artists"
-                        IsTapEnabled="True"
-                        Tapped="Artists_Tapped">
+        <RelativePanel Name="TypeSelection"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Visibility="Visible" >
+            
+            <Button Name="Artists"
+                    Click="Artists_Click"
+                    Width="200"
+                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+              
+                <StackPanel>
+                    <TextBlock Text="Artists"
+                               TextAlignment="Center"
+                               FontFamily="Bold"
+                               FontSize="40" />
+                    
+                    <Image Name="Image"
+                           Width="150"
+                           Height="150"
+                           Source="Assets/BrushedMetal.png" />
+                </StackPanel>
+            </Button>
+            <Button Name="Albums"
+                    Click="Albums_Click"
+                    Width="200"
+                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                    RelativePanel.RightOf="Artists">
                 
-                <Image Width="150"
-                       Height="150"
-                       Source="Assets/BrushedMetal.png"/>
-                <TextBlock Text="Are you ready?"/>
-            </StackPanel>
-            <StackPanel Name="Albums"
-                        Grid.Column="1"
-                        IsTapEnabled="True"
-                        Tapped="Albums_Tapped">
-                <Image Width="150"
-                       Height="150"
-                       Source="Assets/BrushedMetal.png"/>
-                <TextBlock/>
-            </StackPanel>
-            <StackPanel Name="Songs"
-                        Grid.Column="2"
-                        IsTapEnabled="True"
-                        Tapped="Songs_Tapped">
-                <Image Width="150"
-                       Height="150"
-                       Source="Assets/BrushedMetal.png"/>
-                <TextBlock/>
-            </StackPanel>
-            <StackPanel Name="Playlists"
-                        Grid.Column="3"
-                        IsTapEnabled="True"
-                        Tapped="Playlists_Tapped">
-                <Image Width="150"
-                       Height="150"
-                       Source="Assets/BrushedMetal.png"/>
-                <TextBlock/></StackPanel>
-        </Grid>
-        <GridView Name="ArtistSelection"
-                  ItemTemplate="{StaticResource FolderTemplate}"
-                  IsItemClickEnabled="True"
-                  ItemClick="ArtistSelection_ItemClick"
-                 >
-                  
-        </GridView>
-        <GridView Name="AlbumSelection"
-                  ItemTemplate="{StaticResource FolderTemplate}">
-        </GridView>
-        <ListView Name="SongSelection">
+                <StackPanel>
+                    <TextBlock Text="Albums"
+                               TextAlignment="Center"
+                               FontFamily="Bold"
+                               FontSize="40" />
+                    
+                    <Image Width="150"
+                           Height="150"
+                           Source="Assets/BrushedMetal.png"/>
+                    <TextBlock/>
+                </StackPanel>
+            </Button>
+            <Button Name="Songs"
+                    Click="Songs_Click"
+                    Width="200"
+                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                    RelativePanel.RightOf="Albums"
+                    >
+                <StackPanel Name="Song" >
+                    <TextBlock Text="Songs"
+                               TextAlignment="Center"
+                               FontFamily="Bold"
+                               FontSize="40" />
+                    <Image Width="150"
+                           Height="150"
+                           Source="Assets/BrushedMetal.png"/>
+                    <TextBlock/>
+                </StackPanel>
+            </Button>
+            <Button Name="Playlists"
+                    Click="Artists_Click"
+                    Width="200"
+                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                    RelativePanel.RightOf="Songs">
+                <StackPanel Name="Playlist"
+                            RelativePanel.RightOf="Songs" >
+                    <TextBlock Text="Playlists"
+                               TextAlignment="Center"
+                               FontFamily="Bold"
+                               FontSize="40" />
+                    <Image Width="150"
+                           Height="150"
+                           Source="Assets/BrushedMetal.png"/>
+                    <TextBlock/>
+                </StackPanel>
+            </Button>
+        </RelativePanel>
+        <RelativePanel Name="ArtistSelection"
+                       Visibility="Collapsed"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+            <GridView Name="ArtistsGrid" 
+                      IsItemClickEnabled="True" 
+                      ItemClick="ArtistSelection_ItemClick" 
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Center"
+                      VerticalContentAlignment="Center">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="data:Artist">
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="{x:Bind photo }"
+                                   Width="150"
+                                   Height="150"/>
+                            <TextBlock Text="{x:Bind name}"
+                                       Width="150"
+                                       FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </RelativePanel>
+
+
+        <RelativePanel Name="AlbumSelection"
+                   Visibility="Collapsed"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            <GridView Name="AlbumGrid" 
+                      IsItemClickEnabled="True" 
+                      ItemClick="AlbumGrid_ItemClick" 
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Center"
+                      VerticalContentAlignment="Center">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="data:Album">
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="{x:Bind cover }"
+                                   Width="150"
+                                  Height="150"/>
+                            <TextBlock Text="{x:Bind name}"
+                                       Width="150"
+                                       FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+
+        </RelativePanel>
+        <RelativePanel Name="SongSelection"
+                       Visibility="Collapsed"
+                       HorizontalAlignment="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <Grid Name="ListHeader"
+                      Width="800">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Title"
+                               Margin="10,10,0,0"
+                               FontSize="25"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Artist"
+                               Margin="10,10,0,0"
+                               FontSize="25"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Length"
+                               Margin="10,10,0,0"
+                               FontSize="25"
+                               Grid.Column="2"
+                               HorizontalAlignment="Center"/>
+                </Grid>
+                <ListView Name="SongList"
+                          Grid.Row="1"
+                          IsItemClickEnabled="True"
+                          ScrollViewer.VerticalScrollMode="Enabled"
+                          ScrollViewer.IsVerticalRailEnabled="True"
+                          
+                          ItemClick="ListView_ItemClick"
+                          VerticalAlignment="Center"
+                          Style="{Binding }">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="data:Song">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="400"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{x:Bind name}"
+                                           Margin="10,10,0,0"
+                                           FontSize="25"/>
+                                <TextBlock Text="{x:Bind artist}"
+                                           Grid.Column="1"
+                                           Margin="50,10,0,0"
+                                           FontSize="25"/>
+                                <TextBlock Text="{x:Bind duration}"
+                                           Grid.Column="2"
+                                           Margin="50,10,0,0"
+                                           FontSize="25"/>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            
+        </RelativePanel>
+        
+
+        <ListView Name="PlaylistSelection"
+                  Visibility="Collapsed">
 
         </ListView>
-        <ListView Name="PlaylistSelection">
-
-        </ListView>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <ProgressRing Name="LoadingRing"
+                          Margin="250,250,0,0"
+                          Visibility="Collapsed"
+                          VerticalAlignment="Center" 
+                          HorizontalAlignment="Center"
+                          Height="200" 
+                          Width="200" />
+        </StackPanel>
     </Grid>
 </Page>

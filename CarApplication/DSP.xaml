@@ -8,15 +8,16 @@
     mc:Ignorable="d">
 
 
-    <StackPanel Orientation="Horizontal" >
-        <StackPanel.Background>
+    <Grid HorizontalAlignment="Center" 
+          Width="800">
+        <Grid.Background>
             <ImageBrush ImageSource="Assets/Ford_Logo.png"
                         Stretch="UniformToFill">
             </ImageBrush>
-        </StackPanel.Background>
+        </Grid.Background>
 
         <StackPanel Orientation="Horizontal" 
-                    HorizontalAlignment="Right" 
+                    HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     Width="auto">
             <StackPanel>
@@ -82,5 +83,5 @@
                     Margin="5,10,5,10"/>
             </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Page>

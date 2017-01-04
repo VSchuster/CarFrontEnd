@@ -1,5 +1,4 @@
-﻿using CarApplication.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,27 +11,26 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace CarApplication
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class Music : Page
+    public sealed partial class MainUserControl : UserControl
     {
-        public Song songNowPlaying { get; set; }
-        public Music()
+        public delegate void MyEventHandler(object source, EventArgs e);
+
+        public event MyEventHandler OnNavigateParentReady;
+
+        public MainUserControl()
         {
             this.InitializeComponent();
         }
 
-        private void AlbumArt_Click(object sender, RoutedEventArgs e)
+        private void testbtn_Click(object sender, RoutedEventArgs e)
         {
-           
+            OnNavigateParentReady(this, null);
         }
     }
 }

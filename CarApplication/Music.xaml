@@ -50,15 +50,15 @@
             
             <RelativePanel Name="UpperDisplay"
                            RelativePanel.AlignVerticalCenterWithPanel="True">
-                <HyperlinkButton Name="AlbumArt"
-                                 Margin="10,0,30,0"
-                                 Width="150"
-                                 Height="150">
-                    <HyperlinkButton.Background>
-                        <ImageBrush ImageSource="Assets/Ford_Logo.png"
-                                Stretch="UniformToFill"/>
-                    </HyperlinkButton.Background>
-                </HyperlinkButton>
+                <Button Name="AlbumArt"
+                        
+                        Margin="10,0,30,0"
+                        Width="150"
+                        Height="150">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{x:Bind songNowPlaying.albumCover}"/>
+                    </Button.Background>
+                </Button>
                 
                 <RelativePanel Name="TextDisplay"
                                Height="150"
@@ -69,17 +69,17 @@
                                Background="Wheat">
 
                     <TextBlock Name="Title"
-                               Text="Title"
+                               Text="{x:Bind songNowPlaying.name}"
                                RelativePanel.AlignHorizontalCenterWithPanel="True"
                                FontSize="40"/>
                     <TextBlock Name="Album"
                                RelativePanel.Below="Title"
-                               Text="Album"
+                               Text="{x:Bind songNowPlaying.album}"
                                FontSize="26"
                                RelativePanel.AlignHorizontalCenterWithPanel="True" VerticalAlignment="Top"/>
                     <TextBlock Name="Artist"
                                RelativePanel.Below="Album"
-                               Text="Artist"
+                               Text="{x:Bind songNowPlaying.artist}"
                                FontSize="26"
                                RelativePanel.AlignHorizontalCenterWithPanel="True" Height="35" Margin="-0.2,0.4,0,-0.2" VerticalAlignment="Top"/>
                 </RelativePanel>

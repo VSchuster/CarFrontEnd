@@ -26,7 +26,9 @@ namespace CarApplication
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public Song NowPlayingSong;
         
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -34,13 +36,14 @@ namespace CarApplication
             {
                 BackButton.Visibility = Visibility.Collapsed;
             }
-            //StorageFolder Library = KnownFolders.MusicLibrary;
-            var AllArtists = new ObservableCollection<StorageFolder>();
-            var AllAlbums = new ObservableCollection<StorageFolder>();
-            var AllSongs = new ObservableCollection<StorageFile>();
-            var AllPlaylists = new ObservableCollection<StorageFolder>();
-            var SearchList = new ObservableCollection<StorageItemTypes>();
+            //Set NowPlayingSong to last song on bootup.
+                    
             MainFrame.Navigate(typeof(Home));
+        }
+
+        private void MyControl_OnNavigateParentReady(object source, EventArgs e)
+        {
+            Frame.Navigate(typeof(Library));
         }
 
         //Hambergermenu Click opens the SplitView Pane
@@ -326,28 +329,15 @@ namespace CarApplication
                 }
             }
         }
-        
-        private async Task GetArtists(
-            ObservableCollection<StorageFolder> Folder,
-            StorageFolder Parent)
+
+        public void JumpToNowPlaying()
         {
-            foreach (var item in await Parent.GetFoldersAsync())
-            {
-                Folder.Add(item);
-            }
+            Set_NowPlaying_On(false);
+            MainFrame.Navigate(typeof(Music));
         }
 
+            
         
-
-
-        private async Task GetSongs(
-            ObservableCollection<StorageFile> Songs,
-            StorageFolder Parent)
-        {
-            foreach (var item in await Parent.GetFilesAsync())
-            {
-                Songs.Add(item);
-            }
-        }
     }
+    
 }
